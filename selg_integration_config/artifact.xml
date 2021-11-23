@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="ms_employee" groupId="ru.selg.message-store" version="1.0.0" type="synapse/message-store" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-stores/ms_employee.xml</file>
+    </artifact>
+    <artifact name="mp_employee" groupId="ru.selg.message-processors" version="1.0.0" type="synapse/message-processors" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/message-processors/mp_employee.xml</file>
+    </artifact>
+    <artifact name="ps_get_employee" groupId="ru.selg.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/ps_get_employee.xml</file>
+    </artifact>
+    <artifact name="ps_save_employee" groupId="ru.selg.proxy-service" version="1.0.0" type="synapse/proxy-service" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/proxy-services/ps_save_employee.xml</file>
+    </artifact>
+    <artifact name="ep_adr_save_employee" groupId="ru.selg.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/ep_adr_save_employee.xml</file>
+    </artifact>
+    <artifact name="seq_fault_drop" groupId="ru.selg.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/seq_fault_drop.xml</file>
+    </artifact>
+    <artifact name="seq_replay" groupId="ru.selg.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/seq_replay.xml</file>
+    </artifact>
+    <artifact name="fc_sftp_ssh" groupId="ru.selg.local-entry" version="1.0.0" type="synapse/local-entry" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/local-entries/fc_sftp_ssh.xml</file>
+    </artifact>
+</artifacts>

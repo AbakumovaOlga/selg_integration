@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions name="wsdl_get_employee_file"
+	targetNamespace="http://www.selg.ru/integration/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.selg.ru/integration/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    	<xsd:import
+    		namespace=""
+    		schemaLocation="../xsd/xsd_employee.xsd">
+    	</xsd:import></xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="get_list_employeeRequest">
+		<wsdl:part element="ВыгрузкаДляV8" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="wsdl_get_employee_file">
+		<wsdl:operation name="get_list_employee">
+			<wsdl:input message="tns:get_list_employeeRequest" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="wsdl_get_employee_fileSOAP"
+		type="tns:wsdl_get_employee_file">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="get_list_employee">
+			<soap:operation
+				soapAction="http://www.selg.ru/integration/get_list_employee" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="wsdl_get_employee">
+		<wsdl:port binding="tns:wsdl_get_employee_fileSOAP" name="wsdl_get_employeeSOAP">
+			<soap:address location="http://www.selg.ru/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

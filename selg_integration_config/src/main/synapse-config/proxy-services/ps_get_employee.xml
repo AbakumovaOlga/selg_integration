@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="ps_get_employee" startOnLoad="true" transports="http https local" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <property description="correlation_id" expression="fn:substring-after(get-property('MessageID'), 'urn:uuid:')" name="correlation_id" scope="default" type="STRING"/>
+            <header description="correlation_id" expression="get-property('correlation_id')" name="n:correlation_id" scope="default" xmlns:n="http://www.w3.org/2005/Atom"/>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="process_start" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="start"/>
+                <property name="step" value="process"/>
+                <property name="description" value="старт потока"/>
+            </log>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="receiving_ok" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="ok"/>
+                <property name="step" value="receiving"/>
+                <property name="description" value="сообщение получено от отправителя"/>
+            </log>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="validate_start" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="start"/>
+                <property name="step" value="validate"/>
+                <property name="description" value="проверка исходного сообщения на соответсвие схеме"/>
+            </log>
+            <property description="status" name="status" scope="default" type="STRING" value="ok"/>
+            <validate cache-schema="true">
+                <schema key="gov:custom/xsd_employee.xsd"/>
+                <on-fail>
+                    <property description="status" name="status" scope="default" type="STRING" value="ERROR"/>
+                    <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+                    <log description="validate_error" level="custom" separator="&amp;">
+                        <property name="system_sender" value="1С: УПП ГДП"/>
+                        <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                        <property name="object_name" value="Сотрудники"/>
+                        <property expression="get-property('correlation_id')" name="correlation_id"/>
+                        <property expression="get-property('guid_from_js')" name="message_id"/>
+                        <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                        <property name="step_status" value="error"/>
+                        <property name="step" value="validate"/>
+                        <property expression="$ctx:ERROR_MESSAGE" name="description"/>
+                    </log>
+                    <makefault version="soap11">
+                        <code value="soap11Env:Server" xmlns:soap11Env="http://schemas.xmlsoap.org/soap/envelope/"/>
+                        <reason expression="$ctx:ERROR_MESSAGE"/>
+                    </makefault>
+                    <log level="full"/>
+                    <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+                    <log description="process_error" level="custom" separator="&amp;">
+                        <property name="system_sender" value="1С: УПП ГДП"/>
+                        <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                        <property name="object_name" value="Сотрудники"/>
+                        <property expression="get-property('correlation_id')" name="correlation_id"/>
+                        <property expression="get-property('guid_from_js')" name="message_id"/>
+                        <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                        <property name="step_status" value="error"/>
+                        <property name="step" value="process"/>
+                        <property name="description" value="поток завершился с ошибкой"/>
+                    </log>
+                    <drop/>
+                </on-fail>
+            </validate>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="validate_finish" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="ok"/>
+                <property name="step" value="validate"/>
+                <property expression="get-property('status')" name="description"/>
+            </log>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="sending_start" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="start"/>
+                <property name="step" value="sending"/>
+                <property name="description" value="отправка сообщения в RabbitMQ"/>
+            </log>
+            <store messageStore="ms_employee"/>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="sending_ok" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="ok"/>
+                <property name="step" value="sending"/>
+                <property name="description" value="сообщение отправлено в RabbitMQ"/>
+            </log>
+            <drop/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+    <publishWSDL key="gov:wsdl/wsdl_get_employee.wsdl" preservePolicy="true">
+        <resource key="gov:custom/xsd_employee.xsd" location="../xsd/xsd_employee.xsd"/>
+    </publishWSDL>
+    <policy key="gov:wsp/wsp_employee.xml"/>
+    <enableSec/>
+</proxy>

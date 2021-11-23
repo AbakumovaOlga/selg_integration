@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint name="ep_adr_save_employee" xmlns="http://ws.apache.org/ns/synapse">
+    <address uri="http://localhost:8290/services/ps_save_employee.ps_save_employeeHttpsSoap11Endpoint">
+        <suspendOnFailure>
+            <initialDuration>-1</initialDuration>
+            <progressionFactor>1.0</progressionFactor>
+        </suspendOnFailure>
+        <markForSuspension>
+            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+        </markForSuspension>
+    </address>
+</endpoint>

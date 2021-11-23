@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="fc_sftp_ssh" xmlns="http://ws.apache.org/ns/synapse">
+    <file.init>
+        <strictHostKeyChecking>false</strictHostKeyChecking>
+        <connectionType>SFTP</connectionType>
+        <host>10.10.0.60</host>
+        <fileLockScheme>Local</fileLockScheme>
+        <sftpConnectionTimeout>100000</sftpConnectionTimeout>
+        <userDirIsRoot>false</userDirIsRoot>
+        <port>22</port>
+        <name>fc_sftp_ssh</name>
+        <sftpSessionTimeout>150000</sftpSessionTimeout>
+        <privateKeyFilePath>repository/resources/security/private.ppk</privateKeyFilePath>
+        <username>techno</username>
+    </file.init>
+</localEntry>

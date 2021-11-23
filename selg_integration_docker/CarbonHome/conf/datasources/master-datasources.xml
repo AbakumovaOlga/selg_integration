@@ -1,0 +1,26 @@
+<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+
+    <providers>
+        <provider>org.wso2.micro.integrator.ndatasource.rdbms.RDBMSDataSourceReader</provider>
+    </providers>
+    <datasources>
+        <datasource>
+            <name>WSO2CarbonDB</name>
+            <description>this database is WSO2CarbonDB</description>
+            <jndiConfig>
+                <name>jdbc/WSO2CarbonDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:postgresql://10.10.0.60:5432/userdb</url>
+                    <username>postgres</username>
+                    <password>postgres</password>
+                    <driverClassName>org.postgresql.Driver</driverClassName>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <maxActive>50</maxActive>
+                </configuration>
+            </definition>
+        </datasource>
+    </datasources>
+</datasources-configuration>

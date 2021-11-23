@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="seq_fault_drop" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+    <log description="sending_error" level="custom" separator="&amp;">
+        <property name="system_sender" value="1С: УПП ГДП"/>
+        <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+        <property name="object_name" value="Сотрудники"/>
+        <property expression="get-property('correlation_id')" name="correlation_id"/>
+        <property expression="get-property('guid_from_js')" name="message_id"/>
+        <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+        <property name="step_status" value="error"/>
+        <property name="step" value="sending"/>
+        <property name="description" value="сообщение не отправлено в файл"/>
+    </log>
+    <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+    <log description="process_error" level="custom" separator="&amp;">
+        <property name="system_sender" value="1С: УПП ГДП"/>
+        <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+        <property name="object_name" value="Сотрудники"/>
+        <property expression="get-property('correlation_id')" name="correlation_id"/>
+        <property expression="get-property('guid_from_js')" name="message_id"/>
+        <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+        <property name="step_status" value="error"/>
+        <property name="step" value="process"/>
+        <property name="description" value="поток завершился с ошибкой"/>
+    </log>
+    <drop/>
+</sequence>

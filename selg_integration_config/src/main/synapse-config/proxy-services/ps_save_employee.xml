@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy name="ps_save_employee" startOnLoad="true" transports="http https local vfs" xmlns="http://ws.apache.org/ns/synapse">
+    <target>
+        <inSequence>
+            <property description="correlation_id" expression="//n:correlation_id/text()" name="correlation_id" scope="default" type="STRING" xmlns:n="http://www.w3.org/2005/Atom"/>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="receiving_ok" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="ok"/>
+                <property name="step" value="receiving"/>
+                <property name="description" value="сообщение получено из RabbitMQ"/>
+            </log>
+            <property description="OUT_ONLY" name="OUT_ONLY" scope="default" type="STRING" value="true"/>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="sending_start" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="start"/>
+                <property name="step" value="sending"/>
+                <property name="description" value="отправка сообщения в файл"/>
+            </log>
+            <file.write configKey="fc_sftp_ssh">
+                <filePath>/selg/seligdar.xml</filePath>
+                <mimeType>application/xml</mimeType>
+                <compress>false</compress>
+                <writeMode>Overwrite</writeMode>
+                <enableStreaming>false</enableStreaming>
+                <appendNewLine>false</appendNewLine>
+                <enableLock>false</enableLock>
+                <includeResultTo>Message Body</includeResultTo>
+                <updateLastModified>true</updateLastModified>
+            </file.write>
+            <script description="guid_from_js" function="getGUID" key="gov:js/js_logging.js" language="js"/>
+            <log description="sending_start" level="custom" separator="&amp;">
+                <property name="system_sender" value="1С: УПП ГДП"/>
+                <property name="system_receiver" value="ВИСТ АСД Карьер"/>
+                <property name="object_name" value="Сотрудники"/>
+                <property expression="get-property('correlation_id')" name="correlation_id"/>
+                <property expression="get-property('guid_from_js')" name="message_id"/>
+                <property expression="get-property(&quot;SYSTEM_DATE&quot;, &quot;yyyy-MM-dd' 'HH:mm:ss.SSSXXX&quot;)" name="timestamp_str"/>
+                <property name="step_status" value="start"/>
+                <property name="step" value="sending"/>
+                <property name="description" value="сообщение отправлено в файл"/>
+            </log>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </target>
+</proxy>

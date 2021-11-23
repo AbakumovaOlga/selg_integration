@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messageStore class="org.apache.synapse.message.store.impl.rabbitmq.RabbitMQStore" name="ms_employee" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="store.rabbitmq.host.name">10.10.0.63</parameter>
+    <parameter name="store.producer.guaranteed.delivery.enable">false</parameter>
+    <parameter name="store.rabbitmq.host.port">5672</parameter>
+    <parameter name="store.rabbitmq.route.key"/>
+    <parameter name="store.rabbitmq.username">guest</parameter>
+    <parameter name="store.rabbitmq.virtual.host"/>
+    <parameter name="rabbitmq.connection.ssl.enabled">false</parameter>
+    <parameter name="store.rabbitmq.exchange.name">selg_exchange_employee</parameter>
+    <parameter name="store.rabbitmq.queue.name">selg_queue_employee</parameter>
+    <parameter name="store.rabbitmq.password">guest</parameter>
+</messageStore>

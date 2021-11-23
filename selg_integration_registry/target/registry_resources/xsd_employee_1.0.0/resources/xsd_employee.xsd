@@ -1,0 +1,40 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ВыгрузкаДляV8">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Организация">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="РегНомер"/>
+              <xs:element type="xs:string" name="Наименование"/>
+              <xs:element name="ПоименныйСписок">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Сотрудник" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="КраткийКодКарты"/>
+                            <xs:attribute type="xs:string" name="ПодразделениеОрганизации"/>
+                            <xs:attribute type="xs:string" name="КодПодразделения"/>
+                            <xs:attribute type="xs:string" name="Должность"/>
+                            <xs:attribute type="xs:string" name="КодДолжности"/>
+                            <xs:attribute type="xs:string" name="Отчество"/>
+                            <xs:attribute type="xs:string" name="Имя"/>
+                            <xs:attribute type="xs:string" name="Фамилия"/>
+                            <xs:attribute type="xs:string" name="ТабельныйНомер"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="ДатаСоставления"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

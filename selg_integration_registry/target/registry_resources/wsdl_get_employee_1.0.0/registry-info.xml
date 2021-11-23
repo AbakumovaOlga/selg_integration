@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><resources>
+    <item>
+        <file>wsdl_get_employee.wsdl</file>
+        <path>/_system/governance/wsdl</path>
+        <mediaType>application/wsdl+xml</mediaType>
+        <properties/>
+    </item>
+</resources>

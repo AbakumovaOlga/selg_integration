@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="xsd_employee" groupId="ru.selg.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>xsd/xsd_employee.xsd</file>
+            <path>/_system/governance/custom</path>
+            <mediaType>application/x-xsd+xml</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="wsp_employee" groupId="ru.selg.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>wsp/wsp_employee.xml</file>
+            <path>/_system/governance/wsp</path>
+            <mediaType>application/wspolicy+xml</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="wsdl_employee" groupId="ru.selg.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>wsdl/wsdl_employee.wsdl</file>
+            <path>/_system/governance/wsdl</path>
+            <mediaType>application/wsdl+xml</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="wsdl_get_employee" groupId="ru.selg.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>wsdl/wsdl_get_employee.wsdl</file>
+            <path>/_system/governance/wsdl</path>
+            <mediaType>application/wsdl+xml</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+    <artifact name="js_logging" groupId="ru.selg.resource" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+        <item>
+            <file>js/js_logging.js</file>
+            <path>/_system/governance/js</path>
+            <mediaType>application/javascript</mediaType>
+            <properties/>
+        </item>
+    </artifact>
+</artifacts>
